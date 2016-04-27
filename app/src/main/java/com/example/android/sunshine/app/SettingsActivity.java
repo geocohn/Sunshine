@@ -171,6 +171,8 @@ public class SettingsActivity extends PreferenceActivity
         } else if ( key.equals(getString(R.string.pref_units_key)) ) {
             // units have changed. update lists of weather entries accordingly
             getContentResolver().notifyChange(WeatherContract.WeatherEntry.CONTENT_URI, null);
+            // forcing a sync is the easiest way to get wearables to see the change
+            SunshineSyncAdapter.syncImmediately(this);
         } else if ( key.equals(getString(R.string.pref_location_status_key)) ) {
             // our location status has changed.  Update the summary accordingly
             Preference locationPreference = findPreference(getString(R.string.pref_location_key));
